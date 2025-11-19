@@ -14,23 +14,91 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+// Better Auth Models
 
+model User {
+  id            String    @id
+  name          String?
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  // Relations
+  accounts      Account[]
+  sessions      Session[]
+  posts         Post[]
+
+  @@map("user")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?   @db.Text
+  refreshToken          String?   @db.Text
+  idToken               String?   @db.Text
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@unique([providerId, accountId])
+  @@map("account")
+}
+
+model Session {
+  id        String   @id
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+
+  @@map("session")
 }
+
+// ??
+model VerificationToken {
+  id         String   @id
+  token      String   @unique
+  identifier String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("verificationToken")
+}
+
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@map("verification")
+}
+// Application Models
 
 model Post {
-  id    Int     @id @default(autoincrement())
-  title String
-  content String?
-  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId Int
+  id       Int     @id @default(autoincrement())
+  title    String
+  content  String?
+  author   User    @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
