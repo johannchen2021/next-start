@@ -1,7 +1,5 @@
-"use client";
-
-import { useSession, signOut } from "@/lib/auth-client";
-import { Button } from "@/components/ui/button";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -9,39 +7,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { headers } from "next/headers";
+import { SignOutButton } from "@/components/sign-out-button";
 
-export default function ProfilePage() {
-  const { data: session, isPending } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isPending && !session) {
-      router.push("/auth");
-    }
-  }, [session, isPending, router]);
-
-  const handleSignOut = async () => {
-    await signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          router.push("/auth");
-        },
-      },
-    });
-  };
-
-  if (isPending) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <p>Loading...</p>
-      </div>
-    );
-  }
+export default async function ProfilePage() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
   if (!session) {
-    return null;
+    redirect("/auth");
   }
 
   return (
@@ -89,13 +64,7 @@ export default function ProfilePage() {
               </p>
             </div>
 
-            <Button
-              variant="destructive"
-              onClick={handleSignOut}
-              className="w-full"
-            >
-              Sign Out
-            </Button>
+            <SignOutButton />
           </CardContent>
         </Card>
       </div>
