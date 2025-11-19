@@ -2,20 +2,24 @@
 
 ## Overview
 
-Prisma ORM has been set up with SQLite for local development. The database file is stored at `dev.db`.
+Prisma ORM has been set up with **PostgreSQL** using a local Prisma dev instance for local development. The connection uses the Prisma dev server running on `localhost:51214`.
 
 ## Key Files
 
 - **`prisma/schema.prisma`** - Database schema definition with User and Post models
 - **`lib/prisma.ts`** - Prisma Client singleton instance
 - **`prisma/seed.ts`** - Database seed script with sample data
-- **`.env`** - Environment variables (DATABASE_URL points to local SQLite)
+- **`.env`** - Environment variables (DATABASE_URL points to local Prisma Postgres dev instance)
+- **`prisma/migrations/`** - Migration history
 
 ## Available Commands
 
 ### Database Management
 
 ```bash
+# Start local Prisma Postgres dev instance
+pnpm exec prisma dev
+
 # Run migrations (update schema)
 pnpm db:migrate
 
@@ -27,6 +31,12 @@ pnpm db:seed
 
 # Push schema changes (without migrations)
 pnpm db:push
+
+# List Prisma dev instances
+pnpm exec prisma dev ls
+
+# Stop Prisma dev instance
+pnpm exec prisma dev stop default
 ```
 
 ### Development
@@ -94,19 +104,69 @@ await prisma.user.delete({
 
 ## Testing the Setup
 
-Visit `http://localhost:3000/api/users` to see the seeded data in JSON format.
+1. Start the local Prisma Postgres dev instance:
 
-## Switching to PostgreSQL
+```bash
+pnpm exec prisma dev
+```
 
-To use PostgreSQL instead of SQLite:
+2. Run migrations:
+
+```bash
+pnpm db:migrate
+```
+
+3. Seed the database (optional):
+
+```bash
+pnpm db:seed
+```
+
+4. Visit `http://localhost:3000/api/users` to see the data in JSON format
+
+## Using Prisma Studio
+
+```bash
+pnpm db:studio
+```
+
+This opens a visual GUI to browse and edit your database at `http://localhost:5555`
+
+## Local Prisma Dev Instance
+
+The setup uses **Prisma's local development PostgreSQL server** which runs on your machine:
+
+- **Port Range**: 51214-51216
+- **Connection String**: `postgresql://postgres:postgres@localhost:51214/template1`
+- **Data Storage**: `.prisma/` directory in the project
+
+### Starting and Managing the Dev Instance
+
+```bash
+# Start the instance
+pnpm exec prisma dev
+
+# List all instances
+pnpm exec prisma dev ls
+
+# Stop the instance
+pnpm exec prisma dev stop default
+
+# Remove an instance's data
+pnpm exec prisma dev rm default
+```
+
+## Switching to a Production PostgreSQL Database
+
+To use a remote PostgreSQL database:
 
 1. Update `.env`:
 
 ```
-DATABASE_URL="postgresql://user:password@localhost:5432/dbname"
+DATABASE_URL="postgresql://user:password@host:5432/dbname"
 ```
 
-2. Update `prisma/schema.prisma`:
+2. The `prisma/schema.prisma` already has:
 
 ```prisma
 datasource db {
@@ -115,14 +175,15 @@ datasource db {
 }
 ```
 
-3. Regenerate and migrate:
+3. Run migrations:
 
 ```bash
-pnpm exec prisma migrate dev --name init
+pnpm exec prisma migrate deploy
 ```
 
 ## Resources
 
 - [Prisma Documentation](https://www.prisma.io/docs)
+- [Prisma Local Development](https://www.prisma.io/docs/orm/tools-and-interfaces/prisma-cli/commands#dev)
 - [Prisma Best Practices](https://www.prisma.io/docs/guides/performance-and-optimization/query-optimization)
 - [Prisma Studio](https://www.prisma.io/studio)
