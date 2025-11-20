@@ -9,17 +9,33 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { SignOutButton } from "@/components/sign-out-button";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b">
         <div className="container mx-auto max-w-4xl px-6 py-4 flex justify-between items-center">
           <h2 className="text-lg font-semibold">Next.js + Better Auth</h2>
           <div className="flex items-center gap-4">
-            <Link href="/auth">
-              <Button variant="outline">Sign In</Button>
-            </Link>
+            {session ? (
+              <>
+                <Link href="/profile">
+                  <Button variant="outline">{session.user.name} Profile</Button>
+                </Link>
+                <SignOutButton />
+              </>
+            ) : (
+              <Link href="/auth">
+                <Button variant="outline">Sign In</Button>
+              </Link>
+            )}
             <ThemeToggle />
           </div>
         </div>

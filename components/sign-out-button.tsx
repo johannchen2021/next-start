@@ -18,7 +18,7 @@ export function SignOutButton() {
   };
 
   return (
-    <Button variant="destructive" onClick={handleSignOut} className="w-full">
+    <Button variant="destructive" onClick={handleSignOut}>
       Sign Out
     </Button>
   );
