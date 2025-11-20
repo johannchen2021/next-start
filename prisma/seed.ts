@@ -18,8 +18,8 @@ async function main() {
   const user1 = await prisma.user.create({
     data: {
       id: user1Id,
-      email: "bob@example.com",
-      name: "Bob Smith",
+      email: "bob@gmail.com",
+      name: "Bob",
       emailVerified: true,
       accounts: {
         create: {
@@ -49,7 +49,6 @@ async function main() {
   console.log("✅ Database seeded with sample data");
   console.log("Users created:", [user1.email]);
   console.log("📧 Test credentials:");
-  console.log("  Email: bob@example.com   | Password: password123");
 }
 
 main()

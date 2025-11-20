@@ -1,0 +1,98 @@
+{
+  "common": {
+    "signIn": "登录",
+    "signOut": "退出登录",
+    "signUp": "注册",
+    "profile": "个人资料",
+    "name": "姓名",
+    "email": "邮箱",
+    "password": "密码",
+    "loading": "加载中...",
+    "submit": "提交"
+  },
+  "nav": {
+    "title": "Next.js + Better Auth",
+    "home": "首页",
+    "database": "查看数据库"
+  },
+  "home": {
+    "title": "Next.js 与 Better Auth",
+    "subtitle": "现代化的 Next.js 启动模板，集成 Better Auth、Google OAuth、shadcn/ui 组件、Tailwind CSS、Prisma 和 TypeScript。",
+    "auth": {
+      "title": "身份验证",
+      "description": "使用 Better Auth 进行安全认证",
+      "content": "支持邮箱/密码注册和登录，以及 Google OAuth 无缝认证集成。",
+      "cta": "开始使用认证"
+    },
+    "docs": {
+      "title": "文档",
+      "description": "了解更多使用的工具和框架",
+      "betterAuth": "Better Auth 文档",
+      "shadcn": "shadcn/ui",
+      "nextjs": "Next.js 文档"
+    },
+    "database": {
+      "title": "数据库",
+      "description": "PostgreSQL 与 Prisma ORM",
+      "content": "强大的 ORM，用于通过类型安全的查询管理您的数据库。",
+      "prismaDocs": "Prisma 文档",
+      "viewDatabase": "查看数据库"
+    },
+    "styling": {
+      "title": "样式",
+      "description": "使用 Tailwind CSS 的精美组件",
+      "content": "预构建的、可访问的组件，具有可定制的样式。",
+      "tailwindDocs": "Tailwind CSS"
+    },
+    "cta": {
+      "github": "在 GitHub 上查看",
+      "googleSignIn": "使用 Google 登录"
+    }
+  },
+  "auth": {
+    "title": "身份验证",
+    "description": "登录到您的账户或创建新账户",
+    "signInTitle": "登录",
+    "signUpTitle": "注册",
+    "nameLabel": "姓名",
+    "namePlaceholder": "张三",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "you@example.com",
+    "passwordLabel": "密码",
+    "passwordPlaceholder": "请输入密码",
+    "signInButton": "登录",
+    "signUpButton": "注册",
+    "googleButton": "使用 Google 继续",
+    "switchToSignUp": "没有账户？立即注册",
+    "switchToSignIn": "已有账户？立即登录"
+  },
+  "profile": {
+    "title": "个人资料",
+    "description": "您的账户信息",
+    "nameLabel": "姓名",
+    "emailLabel": "邮箱",
+    "avatarLabel": "头像",
+    "emailVerifiedLabel": "邮箱已验证",
+    "emailVerifiedYes": "是",
+    "emailVerifiedNo": "否",
+    "notSet": "未设置",
+    "signOutButton": "退出登录"
+  },
+  "database": {
+    "title": "数据库查看器",
+    "description": "查看您的应用程序数据",
+    "records": "记录",
+    "loading": "正在加载数据库信息...",
+    "error": "错误",
+    "errorMessage": "获取数据库信息失败",
+    "goHome": "返回首页",
+    "backHome": "返回首页",
+    "users": "用户",
+    "sessions": "会话",
+    "totalUsers": "总用户数",
+    "totalSessions": "总会话数",
+    "id": "ID",
+    "userId": "用户 ID",
+    "expiresAt": "过期时间"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "common": {
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signUp": "Sign Up",
+    "profile": "Profile",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "loading": "Loading...",
+    "submit": "Submit"
+  },
+  "nav": {
+    "title": "Next.js + Better Auth",
+    "home": "Home",
+    "database": "View Database"
+  },
+  "home": {
+    "title": "Next.js with Better Auth",
+    "subtitle": "A modern Next.js starter template with Better Auth, Google OAuth, shadcn/ui components, Tailwind CSS, Prisma, and TypeScript.",
+    "auth": {
+      "title": "Authentication",
+      "description": "Secure authentication with Better Auth",
+      "content": "Email/password sign up and sign in, plus Google OAuth integration for seamless authentication.",
+      "cta": "Get Started with Auth"
+    },
+    "docs": {
+      "title": "Documentation",
+      "description": "Learn more about the tools and frameworks used",
+      "betterAuth": "Better Auth Docs",
+      "shadcn": "shadcn/ui",
+      "nextjs": "Next.js Docs"
+    },
+    "database": {
+      "title": "Database",
+      "description": "PostgreSQL with Prisma ORM",
+      "content": "Powerful ORM for managing your database with type-safe queries.",
+      "prismaDocs": "Prisma Docs",
+      "viewDatabase": "View Database"
+    },
+    "styling": {
+      "title": "Styling",
+      "description": "Beautiful components with Tailwind CSS",
+      "content": "Pre-built, accessible components with customizable styling.",
+      "tailwindDocs": "Tailwind CSS"
+    },
+    "cta": {
+      "github": "View on GitHub",
+      "googleSignIn": "Sign In with Google"
+    }
+  },
+  "auth": {
+    "title": "Authentication",
+    "description": "Sign in to your account or create a new one",
+    "signInTitle": "Sign In",
+    "signUpTitle": "Sign Up",
+    "nameLabel": "Name",
+    "namePlaceholder": "John Doe",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "signInButton": "Sign In",
+    "signUpButton": "Sign Up",
+    "googleButton": "Continue with Google",
+    "switchToSignUp": "Don't have an account? Sign up",
+    "switchToSignIn": "Already have an account? Sign in"
+  },
+  "profile": {
+    "title": "Profile",
+    "description": "Your account information",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "avatarLabel": "Avatar",
+    "emailVerifiedLabel": "Email Verified",
+    "emailVerifiedYes": "Yes",
+    "emailVerifiedNo": "No",
+    "notSet": "Not set",
+    "signOutButton": "Sign Out"
+  },
+  "database": {
+    "title": "Database Viewer",
+    "description": "View your application data",
+    "records": "Records",
+    "loading": "Loading database information...",
+    "error": "Error",
+    "errorMessage": "Failed to fetch database info",
+    "goHome": "Go Home",
+    "backHome": "Back Home",
+    "users": "Users",
+    "sessions": "Sessions",
+    "totalUsers": "Total users",
+    "totalSessions": "Total sessions",
+    "id": "ID",
+    "userId": "User ID",
+    "expiresAt": "Expires At"
+  }
+}
