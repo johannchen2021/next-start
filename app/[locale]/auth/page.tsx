@@ -10,8 +10,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 
+// TODO: refactor with useActionState
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
@@ -20,6 +22,8 @@ export default function AuthPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+  const t = useTranslations("auth");
+  const tCommon = useTranslations("common");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,20 +97,23 @@ export default function AuthPage() {
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>{isSignUp ? "Create Account" : "Sign In"}</CardTitle>
-          <CardDescription>
-            {isSignUp ? "Sign up to get started" : "Sign in to your account"}
-          </CardDescription>
+          <CardTitle>
+            {isSignUp ? t("signUpTitle") : t("signInTitle")}
+          </CardTitle>
+          <CardDescription>{t("description")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <form onSubmit={handleSubmit} className="space-y-4">
             {isSignUp && (
               <div>
-                <label className="block text-sm font-medium mb-2">Name</label>
+                <label className="block text-sm font-medium mb-2">
+                  {t("nameLabel")}
+                </label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  placeholder={t("namePlaceholder")}
                   className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
                   required
                 />
@@ -114,22 +121,28 @@ export default function AuthPage() {
             )}
 
             <div>
-              <label className="block text-sm font-medium mb-2">Email</label>
+              <label className="block text-sm font-medium mb-2">
+                {t("emailLabel")}
+              </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                placeholder={t("emailPlaceholder")}
                 className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Password</label>
+              <label className="block text-sm font-medium mb-2">
+                {t("passwordLabel")}
+              </label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                placeholder={t("passwordPlaceholder")}
                 className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
                 required
               />
@@ -142,7 +155,11 @@ export default function AuthPage() {
             )}
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Loading..." : isSignUp ? "Sign Up" : "Sign In"}
+              {loading
+                ? tCommon("loading")
+                : isSignUp
+                ? t("signUpButton")
+                : t("signInButton")}
             </Button>
           </form>
 
@@ -164,17 +181,16 @@ export default function AuthPage() {
             onClick={handleGoogleSignIn}
             disabled={loading}
           >
-            Sign in with Google
+            {t("googleButton")}
           </Button>
 
           <div className="text-center text-sm text-muted-foreground">
-            {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
             <button
               type="button"
               onClick={() => setIsSignUp(!isSignUp)}
               className="text-primary hover:underline font-medium"
             >
-              {isSignUp ? "Sign in" : "Sign up"}
+              {isSignUp ? t("switchToSignIn") : t("switchToSignUp")}
             </button>
           </div>
         </CardContent>

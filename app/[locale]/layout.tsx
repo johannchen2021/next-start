@@ -1,9 +1,15 @@
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Geist, Geist_Mono } from "next/font/google";
-import { routing } from "@/i18n/routing";
+import { routing, Link } from "@/i18n/routing";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+import { Button } from "@/components/ui/button";
+import { SignOutButton } from "@/components/sign-out-button";
+import { LocaleSwitcher } from "@/components/locale-switcher";
+import { ThemeToggle } from "@/components/theme-toggle";
 import "@/app/globals.css";
 
 const geistSans = Geist({
@@ -33,7 +39,14 @@ export default async function LocaleLayout({
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
-  const messages = await getMessages();
+  const [messages, session, navT, commonT] = await Promise.all([
+    getMessages(),
+    auth.api.getSession({
+      headers: await headers(),
+    }),
+    getTranslations({ locale, namespace: "nav" }),
+    getTranslations({ locale, namespace: "common" }),
+  ]);
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -47,7 +60,32 @@ export default async function LocaleLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <div className="min-h-screen bg-background flex flex-col">
+              <header className="border-b">
+                <div className="container mx-auto max-w-4xl px-6 py-4 flex justify-between items-center">
+                  <h2 className="text-lg font-semibold">{navT("title")}</h2>
+                  <div className="flex items-center gap-4">
+                    {session ? (
+                      <>
+                        <Link href="/profile">
+                          <Button variant="outline">
+                            {session.user.name} {commonT("profile")}
+                          </Button>
+                        </Link>
+                        <SignOutButton />
+                      </>
+                    ) : (
+                      <Link href="/auth">
+                        <Button variant="outline">{commonT("signIn")}</Button>
+                      </Link>
+                    )}
+                    <LocaleSwitcher />
+                    <ThemeToggle />
+                  </div>
+                </div>
+              </header>
+              <main className="flex-1">{children}</main>
+            </div>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
