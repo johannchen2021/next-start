@@ -35,7 +35,6 @@
   "devDependencies": {
     "@prisma/client": "^6.19.0",
     "@tailwindcss/postcss": "^4.1.17",
-    "@types/bcryptjs": "^3.0.0",
     "@types/node": "^24.10.1",
     "@types/pg": "^8.15.6",
     "@types/react": "^19.2.6",

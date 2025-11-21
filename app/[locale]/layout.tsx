@@ -39,10 +39,12 @@ export default async function LocaleLayout({
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
+  const requestHeaders = await headers();
+
   const [messages, session, navT, commonT] = await Promise.all([
     getMessages(),
     auth.api.getSession({
-      headers: await headers(),
+      headers: requestHeaders,
     }),
     getTranslations({ locale, namespace: "nav" }),
     getTranslations({ locale, namespace: "common" }),
@@ -72,7 +74,7 @@ export default async function LocaleLayout({
                             {session.user.name} {commonT("profile")}
                           </Button>
                         </Link>
-                        <SignOutButton />
+                        <SignOutButton label={commonT("signOut")} />
                       </>
                     ) : (
                       <Link href="/auth">

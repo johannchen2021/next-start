@@ -2,9 +2,13 @@
 
 import { signOut } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 
-export function SignOutButton() {
+type SignOutButtonProps = {
+  label?: string;
+};
+
+export function SignOutButton({ label = "Sign Out" }: SignOutButtonProps) {
   const router = useRouter();
 
   const handleSignOut = async () => {
@@ -19,7 +23,7 @@ export function SignOutButton() {
 
   return (
     <Button variant="destructive" onClick={handleSignOut}>
-      Sign Out
+      {label}
     </Button>
   );
 }

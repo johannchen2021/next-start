@@ -76,6 +76,19 @@
     "emailVerifiedYes": "Yes",
     "emailVerifiedNo": "No",
     "notSet": "Not set",
+    "resetPassword": {
+      "title": "Reset Password",
+      "description": "Update the password you use for email sign in.",
+      "newPasswordLabel": "New Password",
+      "confirmPasswordLabel": "Confirm Password",
+      "submit": "Update Password",
+      "pending": "Updating...",
+      "success": "Your password has been updated.",
+      "mismatch": "Passwords do not match.",
+      "tooShort": "Password must be at least 8 characters.",
+      "noAccount": "Email/password account not found.",
+      "unknown": "Unable to update password. Please try again."
+    },
     "signOutButton": "Sign Out"
   },
   "database": {
