@@ -2,25 +2,18 @@ NextJs Project Start Template
 
 ## Frontend
 
-Shadcn
-Dark mode
-Admin Dashboard (Authorization)
-Internationalization
-AI Element
+- Shadcn / Dark mode
+- Internationalization
+- Admin Dashboard (Authorization todo)
+- AI Element (todo)
 
 ## Backend
 
-Prisma
-PostGre (Neon)
-Better Auth
-AI SDK (todo)
-Stripe/Polar (todo)
-
-## Prisma
-
-Migration problem:
-Restart prisma dev
-rerun migration
+- Prisma
+- Pg
+- Better Auth
+- AI SDK (todo)
+- Stripe/Polar (todo)
 
 ## Better Auth
 
