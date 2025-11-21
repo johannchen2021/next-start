@@ -6,12 +6,15 @@ Shadcn
 Dark mode
 Admin Dashboard (Authorization)
 Internationalization
+AI Element
 
 ## Backend
 
 Prisma
 PostGre (Neon)
 Better Auth
+AI SDK (todo)
+Stripe/Polar (todo)
 
 ## Prisma
 
@@ -23,8 +26,3 @@ rerun migration
 
 generate lastest schema
 pnpm dlx @better-auth/cli@latest generate
-
-## TODO
-
-redirect to admin page
-protect admin page
